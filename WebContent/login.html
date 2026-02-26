@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>SmartExpense Login</title>
+    <style>
+        :root {
+            --bg: #0f172a; /* slate-900 */
+            --card: #111827; /* gray-900 */
+            --muted: #94a3b8; /* slate-400 */
+            --text: #e5e7eb; /* gray-200 */
+            --primary: #22c55e; /* emerald-500 */
+            --primary-dark: #16a34a; /* emerald-600 */
+            --accent: #60a5fa; /* blue-400 */
+            --danger: #f87171; /* red-400 */
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            color: var(--text);
+            background: radial-gradient(1200px 600px at 80% -10%, rgba(96,165,250,.25), transparent 60%),
+                        radial-gradient(1000px 500px at -10% 110%, rgba(34,197,94,.2), transparent 60%),
+                        var(--bg);
+            display: grid;
+            place-items: center;
+            padding: 2rem;
+        }
+        .card {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(180deg, rgba(17,24,39,.9), rgba(17,24,39,.7));
+            border: 1px solid rgba(148,163,184,.15);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,.35);
+            backdrop-filter: blur(6px);
+        }
+        h1 {
+            margin: 0 0 1rem;
+            font-size: 1.5rem;
+            letter-spacing: .5px;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+        h1 span.logo {
+            display: inline-grid;
+            place-items: center;
+            width: 36px; height: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #0b1020;
+            font-weight: 800;
+        }
+        p.sub { margin: 0 0 1.25rem; color: var(--muted); }
+        form { display: grid; gap: .75rem; }
+        label { font-size: .85rem; color: var(--muted); }
+        .field {
+            display: grid; gap: .35rem;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: .75rem .9rem;
+            border-radius: 10px;
+            border: 1px solid rgba(148,163,184,.25);
+            background: rgba(2,6,23,.5);
+            color: var(--text);
+            outline: none;
+        }
+        input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(96,165,250,.2);
+        }
+        .actions { display: flex; align-items: center; justify-content: space-between; margin-top: .5rem; }
+        button[type="submit"] {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #06121a;
+            border: none;
+            padding: .7rem 1.1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover { filter: brightness(1.05); }
+        .hint { font-size: .8rem; color: var(--muted); }
+        .hint strong { color: #ffffff; }
+    </style>
+    <script>
+        function submitLogin(e){
+            e.preventDefault();
+            document.getElementById('loginForm').submit();
+        }
+    </script>
+    </head>
+<body>
+    <div class="card">
+        <h1><span class="logo">SE</span> SmartExpense</h1>
+        <p class="sub">Sign in to your dashboard</p>
+        <form id="loginForm" method="post" action="login">
+            <div class="field">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="admin" required>
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="password" required>
+            </div>
+            <div class="actions">
+                <span class="hint">Demo: <strong>admin / password</strong></span>
+                <button type="submit" onclick="submitLogin(event)">Login</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+

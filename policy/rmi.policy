@@ -1,0 +1,14 @@
+// RMI Security Policy File (Week 10)
+// This policy file grants all permissions to RMI code
+// 
+// Usage:
+//   java -Djava.security.policy=policy/rmi.policy rmi.ExpenseServer
+//
+// WARNING: This is a permissive policy for development/learning purposes only.
+// In production, use more restrictive policies.
+
+grant {
+    // Grant all permissions (for development/learning)
+    permission java.security.AllPermission;
+};
+

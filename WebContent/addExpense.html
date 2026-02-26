@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Expense</title>
+    <style>
+        :root {
+            --bg: #0b1020;
+            --panel: #0f172a;
+            --muted: #9aa5b1;
+            --text: #e8edf2;
+            --primary: #22c55e;
+            --primary-dark: #16a34a;
+            --accent: #60a5fa;
+            --border: rgba(148,163,184,.2);
+            --danger: #ef4444;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, system-ui, Segoe UI, Roboto, Arial, sans-serif;
+            color: var(--text);
+            background: radial-gradient(900px 500px at 10% -10%, rgba(96,165,250,.2), transparent 60%),
+                        radial-gradient(900px 500px at 110% 110%, rgba(34,197,94,.16), transparent 60%),
+                        var(--bg);
+            padding: 2rem;
+        }
+        .nav {
+            display: flex; align-items: center; justify-content: space-between;
+            max-width: 900px; margin: 0 auto 1rem; padding: .75rem 1rem;
+            border: 1px solid var(--border); border-radius: 12px; background: rgba(2,6,23,.5);
+        }
+        .brand { display: flex; align-items: center; gap: .5rem; font-weight: 700; }
+        .brand .logo { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--primary), var(--accent)); display: inline-block; }
+        .link { color: var(--accent); text-decoration: none; }
+        .container { max-width: 900px; margin: 0 auto; display: grid; gap: 1rem; }
+        .panel {
+            border: 1px solid var(--border);
+            background: linear-gradient(180deg, rgba(15,23,42,.9), rgba(15,23,42,.7));
+            border-radius: 16px; padding: 1.25rem; box-shadow: 0 8px 24px rgba(0,0,0,.35);
+        }
+        h2 { margin: 0 0 .75rem; }
+        .error { display:none; border: 1px solid rgba(239,68,68,.3); background: rgba(239,68,68,.12); color: #fecaca; padding: .6rem .8rem; border-radius: 10px; }
+        form { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 1rem; }
+        .full { grid-column: 1 / -1; }
+        label { font-size: .85rem; color: var(--muted); }
+        input, select {
+            width: 100%; padding: .7rem .9rem; border-radius: 10px; border: 1px solid var(--border);
+            background: rgba(2,6,23,.5); color: var(--text); outline: none;
+        }
+        input:focus, select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(96,165,250,.2); }
+        .actions { grid-column: 1 / -1; display: flex; justify-content: flex-end; gap: .6rem; margin-top: .2rem; }
+        .btn { border: none; padding: .65rem 1rem; border-radius: 10px; font-weight: 700; cursor: pointer; }
+        .btn.secondary { background: rgba(96,165,250,.15); color: var(--accent); border: 1px solid rgba(96,165,250,.3); }
+        .btn.primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #06121a; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="brand"><span class="logo"></span> SmartExpense</div>
+        <a class="link" href="dashboard">Back to Dashboard</a>
+    </div>
+    <div class="container">
+        <div class="panel">
+            <h2>Add Expense</h2>
+            <p id="err" class="error"></p>
+            <form method="post" action="addExpense">
+                <div>
+                    <label>Name</label>
+                    <input type="text" name="name" placeholder="e.g., Lunch" required>
+                </div>
+                <div>
+                    <label>Amount</label>
+                    <input type="number" step="0.01" min="0" name="amount" placeholder="0.00" required>
+                </div>
+                <div>
+                    <label>Category</label>
+                    <select name="category">
+                        <option>Food</option>
+                        <option>Transport</option>
+                        <option>Bills</option>
+                        <option>Entertainment</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Date</label>
+                    <input type="date" name="date" required>
+                </div>
+                <div class="actions">
+                    <a class="btn secondary" href="dashboard">Cancel</a>
+                    <button class="btn primary" type="submit">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const err = params.get('error');
+        if (err) {
+            const el = document.getElementById('err');
+            el.textContent = err.replace(/\+/g,' ');
+            el.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+
+

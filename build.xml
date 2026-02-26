@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SmartExpense" default="dist" basedir=".">
+    <property name="src" location="src"/>
+    <property name="web" location="WebContent"/>
+    <property name="build" location="build"/>
+    <property name="dist" location="dist"/>
+
+    <target name="clean">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${build}/classes"/>
+        <javac srcdir="${src}" destdir="${build}/classes" includeantruntime="false">
+            <compilerarg value="-Xlint:deprecation"/>
+        </javac>
+    </target>
+
+    <target name="war" depends="compile">
+        <mkdir dir="${dist}"/>
+        <war destfile="${dist}/SmartExpense.war" webxml="${web}/WEB-INF/web.xml" basedir="${web}">
+            <lib/>
+            <classes dir="${build}/classes"/>
+        </war>
+    </target>
+
+    <target name="dist" depends="war"/>
+</project>
+
+
